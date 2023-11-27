@@ -3,27 +3,19 @@ from django.db.models.query import QuerySet
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render
-
 from django.views.generic import TemplateView, ListView
-
-from django.views.generic import TemplateView
-
 from django.views.generic import CreateView
-
 from django.urls import reverse_lazy
-
 from .forms import PhotoPostForm
-
 from django.utils.decorators import method_decorator
-
 from django.contrib.auth.decorators import login_required
-
 from .models import PhotoPost
-
 from django.views.generic import DeleteView
-
-
 from django.views.generic import DetailView
+from django.contrib import messages
+
+def my_view(request):
+    messages.info(request,"My message with an <a href='https://www.youtube.com/watch?v=NxA1hlST-yM'>hyperlink</a>")
 
 class IndexView(ListView):
 
@@ -32,6 +24,7 @@ class IndexView(ListView):
     queryset = PhotoPost.objects.order_by('-posted_at')
 
 @method_decorator(login_required, name='dispatch')
+
 class CreatePhotoView(CreateView):
 
     form_class = PhotoPostForm
