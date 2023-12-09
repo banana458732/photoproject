@@ -12,4 +12,5 @@ urlpatterns = [
     path('photo-detail/<int:pk>',views.DetailView.as_view(),name='photo_detail'),
     path('mypage/',views.MypageView.as_view(),name='mypage'),
     path('photo/<int:pk>/delete/',views.PhotoDeleteView.as_view(),name='photo_delete'),
+    path('contact/', views.ContactView.as_view(),name='contact'),
 ]

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}お問い合わせ{% endblock %}
+
+{% block contents %}
+<!-- Main Content-->
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <strong>連絡を取りたいですか？
+                        以下のフォームに記入してメッセージを送信してください。
+                        できるだけ早くご連絡します。
+                </strong>
+
+                <!-- メールへ送信が成功した時にmessagesに値が入る -->
+                <!-- view.pyのmessages.successメソッドに書いた内容 -->
+                {% if messages %}
+                <ul class = 'list-unstyled' style="list-style: none;">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{message.tags}}" {% endif %}>
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                <div class="'my-5">
+                    <form method="post">
+                        <!-- CSRF(クロスサイトリクエストフォージェリ)対策用タグ -->
+                        <!-- formタグの中に書かないと403エラーを返す -->
+                        {% csrf_token %}
+
+                        <!-- このfor文でform_class(views.py)に記載してあるformクラスの
+                            フィールドの値を取り出して表示している -->
+                        {% for field in form %}
+                            <div class="form-floating">
+                                <div class="form-group floating-label-form-group controls">
+                                    <!-- ラベルタグを作成
+                                        (ラベルタグを生成することで入力値の上にある文字を
+                                        クリックしたら反応してカーソルを表示してくれる) -->
+                                    {{ field.label_tag}}
+                                    
+                                    <!-- 入力欄を作成 -->
+                                    {{ field }}
+
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <br>
+                        <!-- 送信用のボタン -->
+                        <button type="submit"
+                                class="btn btn-primary"
+                                id="sendMessageButton">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+</main>
+{% endblock %}
+

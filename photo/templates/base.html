@@ -155,17 +155,17 @@
           <p class="text-muted">誰でも参加できるニュースサイトです。自分の身の回りであったことならなんでもオッケー！是非、コメントもつけてください！</p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
-          <h4>Contact</h4>
+          <h4>メニュー</h4>
           <ul class="list-unstyled">
             {% if user.is_authenticated %}
             <li><a href="{% url 'photo:mypage' %}" class="text-white">マイページ</a></li>
             <li><a href="{% url 'accounts:logout' %}" class="text-white">ログアウト</a></li>
             <li><a href="{% url 'password_reset' %}" class="text-white">パスワードのリセット</a></li>
-            <li><a href="maito:admin@example.com" class="text-white">Email me</a></li>
+            <li><a href="{% url 'photo:contact' %}" class="text-white">お問い合わせ</a></li>
             {% else %}
             <li><a href="{% url 'accounts:signup' %}" class="text-white">サインアップ</a></li>
             <li><a href="{% url 'accounts:login' %}" class="text-white">ログイン</a></li>
-            <li><a href="maito:admin@example.com" class="text-white">Email me</a></li>
+            <li><a href="{% url 'photo:contact' %}" class="text-white">お問い合わせ</a></li>
             {% endif %}
           </ul>
         </div>
